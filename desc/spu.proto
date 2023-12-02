@@ -1,0 +1,140 @@
+syntax = "proto3";
+
+// Spu message
+
+message SpuInfo {
+  optional uint64 id = 1;
+  optional int64 created_at = 2;
+  optional int64 updated_at = 3;
+  optional uint32 status = 4;
+  optional uint32 sort = 5;
+  optional string name = 6;
+  optional string keyword = 7;
+  optional string introduction = 8;
+  optional string description = 9;
+  optional string bar_code = 10;
+  optional uint64 category_id = 11;
+  optional uint64 brand_id = 12;
+  optional string pic_url = 13;
+  repeated string slider_pic_urls = 14;
+  optional string video_url = 15;
+  optional uint32 unit = 16;
+  optional bool spec_type = 17;
+  optional int32 price = 18;
+  optional int32 market_price = 19;
+  optional int32 cost_price = 20;
+  optional int32 stock = 21;
+  optional uint64 delivery_template_id = 22;
+  optional bool recommend_hot = 23;
+  optional bool recommend_benefit = 24;
+  optional bool recommend_best = 25;
+  optional bool recommend_new = 26;
+  optional bool recommend_good = 27;
+  optional int32 give_integral = 28;
+  repeated uint64 give_coupon_template_ids = 29;
+  optional bool sub_commission_type = 30;
+  repeated int32 activity_orders = 31;
+  optional int32 sales_count = 32;
+  optional int32 virtual_sales_count = 33;
+  optional int32 browse_count = 34;
+}
+
+message SpuListResp {
+  uint64 total = 1;
+  repeated SpuInfo data = 2;
+}
+
+message SpuListReq {
+  uint64 page = 1;
+  uint64 page_size = 2;
+  optional string name = 3;
+  optional string keyword = 4;
+  optional string introduction = 5;
+}
+
+message SpuCreateReq {
+  string	name	=	1;
+  string	keyword	=	2;
+  string	introduction	=	3;
+  string	description	=	4;
+  optional string	barCode	=	5;
+  uint64 	categoryId	=	6;
+  uint64 	brandId	=	7;
+  string	picUrl	=	8;
+  repeated	string	sliderPicUrls	=	9;
+  optional	string	videoUrl	=	10;
+  uint32	unit	=	11;
+  uint32 sort =12;
+  bool	specType	=	13;
+  uint64 deliveryTemplateId = 14;
+  bool recommendHot = 15;
+  bool recommendBenefit = 16;
+  bool recommendBest = 17;
+  bool recommendNew = 18;
+  bool recommendGood = 19;
+  int32 giveIntegral = 20;
+  repeated GiveCouponTemplate giveCouponTemplates= 21;
+  bool subCommissionType = 22;
+  repeated int32 activityOrders = 23;
+  optional int32 virtualSalesCount = 24;
+  repeated SkuCreateOrUpdateReq skus =25;
+}
+
+message SpuUpdateReqVO {
+  string	keyword	=	1;
+  string	introduction	=	2;
+  string	description	=	3;
+  optional string	barCode	=	4;
+  uint64 	categoryId	=	5;
+  uint64 	brandId	=	6;
+  string	picUrl	=	7;
+  repeated	string	sliderPicUrls	=	8;
+  optional	string	videoUrl	=	9;
+  uint32	unit	=	10;
+  uint32 sort =11;
+  bool	specType	=	12;
+  uint64 deliveryTemplateId = 14;
+  bool recommendHot = 15;
+  bool recommendBenefit = 16;
+  bool recommendBest = 17;
+  bool recommendNew = 18;
+  bool recommendGood = 19;
+  int32 giveIntegral = 20;
+  repeated GiveCouponTemplate giveCouponTemplates= 21;
+  bool subCommissionType = 22;
+  repeated int32 activityOrders = 23;
+  optional int32 virtualSalesCount = 24;
+  repeated SkuCreateOrUpdateReq skus =25;
+  uint64 id = 26;
+  int32 salesCount = 27;
+  int32 browseCount =28;
+  uint32 status = 29;
+}
+
+message GiveCouponTemplate {
+  uint64 id = 1;
+  string name = 2;
+}
+
+message SpuUpdateStatusReq {
+  uint64 id = 1;
+  uint32 status = 2;
+}
+service Product {
+
+  // Spu management
+  // group: spu
+  rpc createSpu (SpuCreateReq) returns (BaseIDResp);
+  // group: spu
+  rpc updateSpu (SpuUpdateReqVO) returns (BaseResp);
+  // group: spu
+  rpc updateStatus (SpuUpdateStatusReq) returns (BaseResp);
+  // group: spu
+  rpc getSpuList (SpuListReq) returns (SpuListResp);
+  // group: spu
+  rpc getSpuById (IDReq) returns (SpuInfo);
+  // group: spu
+  rpc deleteSpu (IDReq) returns (BaseResp);
+  //group: spu
+  rpc validateSpuList (IDsReq) returns (SpuListResp);
+}

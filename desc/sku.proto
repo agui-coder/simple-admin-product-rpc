@@ -1,0 +1,56 @@
+syntax = "proto3";
+
+// Sku message
+
+message SkuInfo {
+  optional uint64 id = 1;
+  optional int64 created_at = 2;
+  optional int64 updated_at = 3;
+  optional uint64 spu_id = 4;
+  repeated 	SkuProperty properties = 5;
+  optional int32 price = 6;
+  optional int32 market_price = 7;
+  optional int32 cost_price = 8;
+  optional string bar_code = 9;
+  optional string pic_url = 10;
+  optional int32 stock = 11;
+  optional double weight = 12;
+  optional double volume = 13;
+  optional int32 sales_count = 16;
+}
+
+message SkuListResp {
+  repeated SkuInfo data = 2;
+}
+
+message SkuCreateOrUpdateReq {
+  int32	price	=	1;
+  optional	int32	marketPrice	=	2;
+  optional	int32	costPrice	=	3;
+  optional	string	barCode	=	4;
+  string	picUrl	=	5;
+  int32	stock	=	6;
+  optional	double	weight	=	7;
+  optional	double	volume	=	8;
+  repeated 	SkuProperty	properties	=	9;
+}
+
+message SkuProperty {
+    uint64 propertyId =1;
+    string propertyName =2;
+    uint64 valueId =3;
+    string valueName =4;
+}
+
+service Product {
+
+  // Sku management
+  // group: sku
+  rpc deleteSku (IDReq) returns (BaseResp);
+  // group: sku
+  rpc getSkuList (IDsReq) returns (SkuListResp);
+  // group: sku
+  rpc getSkuById (IDReq) returns (SkuInfo);
+  // group: sku
+  rpc getSkuListBySpuId (IDReq) returns (SkuListResp);
+}

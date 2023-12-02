@@ -1,0 +1,61 @@
+syntax = "proto3";
+
+// Comment message
+
+message CommentInfo {
+  optional uint64 id = 1;
+  optional int64 created_at = 2;
+  optional int64 updated_at = 3;
+  optional int64 user_id = 4;
+  optional string user_nickname = 5;
+  optional string user_avatar = 6;
+  optional bool anonymous = 7;
+  optional int64 order_id = 8;
+  optional int64 order_item_id = 9;
+  optional int64 spu_id = 10;
+  optional string spu_name = 11;
+  optional int64 sku_id = 12;
+  optional string sku_pic_url = 13;
+  optional string sku_properties = 14;
+  optional bool visible = 15;
+  optional int32 scores = 16;
+  optional int32 description_scores = 17;
+  optional int32 benefit_scores = 18;
+  optional string content = 19;
+  optional string pic_urls = 20;
+  optional bool reply_status = 21;
+  optional int64 reply_user_id = 22;
+  optional string reply_content = 23;
+  optional int64  reply_time = 24;
+}
+
+message CommentListResp {
+  uint64 total = 1;
+  repeated CommentInfo data = 2;
+}
+
+message CommentListReq {
+  uint64 page = 1;
+  uint64 page_size = 2;
+  optional string user_nickname = 3;
+  optional string user_avatar = 4;
+  optional string spu_name = 5;
+}
+
+
+service Product {
+
+  // Comment management
+  // group: comment
+  rpc createComment (CommentInfo) returns (BaseIDResp);
+  // group: comment
+  rpc updateComment (CommentInfo) returns (BaseResp);
+  // group: comment
+  rpc getCommentList (CommentListReq) returns (CommentListResp);
+  // group: comment
+  rpc getCommentById (IDReq) returns (CommentInfo);
+  // group: comment
+  rpc deleteComment (IDReq) returns (BaseResp);
+
+
+}

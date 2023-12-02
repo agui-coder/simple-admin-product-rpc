@@ -1,0 +1,32 @@
+Name: product.rpc
+ListenOn: 0.0.0.0:9005
+Mode: dev
+
+DatabaseConf:
+  Type: mysql
+  Host: 127.0.0.1
+  Port: 3306
+  DBName: simple_mall
+  Username: root
+  Password: root
+  MaxOpenConn: 100
+  SSLMode: disable # disable or require
+  CacheTime: 5
+  MysqlConfig: "&charset=utf8&loc=Asia%2fShanghai" # Mysql的额外配置
+
+Log:
+  ServiceName: productRpcLogger
+  Level: info
+  Encoding: plain
+#  Mode: file
+#  Path: /home/data/logs/product/rpc
+#  Encoding: json
+#  Level: info
+#  Compress: false
+#  KeepDays: 7
+#  StackCoolDownMillis: 100
+
+Prometheus:
+  Host: 0.0.0.0
+  Port: 4001
+  Path: /metrics

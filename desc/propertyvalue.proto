@@ -1,0 +1,70 @@
+syntax = "proto3";
+
+// PropertyValue message
+
+message PropertyValueInfo {
+  optional uint64 id = 1;
+  optional int64 created_at = 2;
+  optional int64 updated_at = 3;
+  optional uint64 property_id = 4;
+  optional string name = 5;
+  optional string remark = 6;
+}
+
+message PropertyValueCreateReq {
+  uint64 propertyId = 1;
+  string name = 2;
+  optional string remark = 3;
+}
+
+message PropertyValueUpdateReq {
+  uint64 propertyId = 1;
+  string name = 2;
+  optional string remark = 3;
+  uint64 id = 4;
+}
+
+message PropertyValueListResp {
+  uint64 total = 1;
+  repeated PropertyValueInfo data = 2;
+}
+
+message PropertyValueListReq {
+  uint64 page = 1;
+  uint64 page_size = 2;
+  optional string name = 3;
+  optional string remark = 4;
+}
+message Ids {
+  repeated uint64 id =1;
+}
+
+message PropertyValueDetailResp {
+  repeated SkuProperty skuProperty =1;
+}
+
+message PropertyValuePageReq{
+  uint64 page = 1;
+  uint64 page_size = 2;
+  optional string name = 3;
+  optional string propertyId =4;
+}
+service Product {
+
+  // PropertyValue management
+  // group: propertyvalue
+  rpc createPropertyValue (PropertyValueCreateReq) returns (BaseIDResp);
+  // group: propertyvalue
+  rpc deletePropertyValue (IDReq) returns (BaseResp);
+  // group: propertyvalue
+  rpc getPropertyValueById (IDReq) returns (PropertyValueInfo);
+  // group: propertyvalue
+  rpc getPropertyValueDetailList (IDsReq) returns (PropertyValueDetailResp);
+  // group: propertyvalue
+  rpc getPropertyValueListByPropertyId (IDsReq) returns (PropertyValueListResp);
+  // group: propertyvalue
+  rpc getPropertyValuePage (PropertyValuePageReq) returns (PropertyValueListResp);
+  // group: propertyvalue
+  rpc updatePropertyValue (PropertyValueUpdateReq) returns (BaseResp);
+
+}

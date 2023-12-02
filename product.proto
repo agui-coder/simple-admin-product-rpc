@@ -1,0 +1,543 @@
+syntax = "proto3";
+
+package product;
+option go_package="./product";
+
+message BrandListReq {
+  optional string name = 1;
+}
+
+message BaseIDResp {
+  uint64 id = 1;
+  string msg = 2;
+}
+
+message BrandCreateReq {
+  uint32 status = 1;
+  string name = 2;
+  string picUrl = 3;
+  uint32 sort = 4;
+  optional string description = 5;
+}
+
+message BrandListResp {
+  uint64 total = 1;
+  repeated BrandInfo data = 2;
+}
+
+message CategoryInfo {
+  optional uint64 id = 1;
+  optional int64 created_at = 2;
+  optional int64 updated_at = 3;
+  optional uint32 status = 4;
+  optional uint64 parent_id = 5;
+  optional string name = 6;
+  optional string pic_url = 7;
+  optional string big_pic_url = 8;
+  optional uint32 sort = 9;
+}
+
+message SpuUpdateReqVO {
+  string keyword = 1;
+  string introduction = 2;
+  string description = 3;
+  optional string barCode = 4;
+  uint64 categoryId = 5;
+  uint64 brandId = 6;
+  string picUrl = 7;
+  repeated string sliderPicUrls = 8;
+  optional string videoUrl = 9;
+  uint32 unit = 10;
+  uint32 sort = 11;
+  bool specType = 12;
+  uint64 deliveryTemplateId = 14;
+  bool recommendHot = 15;
+  bool recommendBenefit = 16;
+  bool recommendBest = 17;
+  bool recommendNew = 18;
+  bool recommendGood = 19;
+  int32 giveIntegral = 20;
+  repeated GiveCouponTemplate giveCouponTemplates = 21;
+  bool subCommissionType = 22;
+  repeated int32 activityOrders = 23;
+  optional int32 virtualSalesCount = 24;
+  repeated SkuCreateOrUpdateReq skus = 25;
+  uint64 id = 26;
+  int32 salesCount = 27;
+  int32 browseCount = 28;
+  uint32 status = 29;
+}
+
+message UUIDsReq {
+  repeated string ids = 1;
+}
+
+message BaseResp {
+  string msg = 1;
+}
+
+message BrandUpdateReq {
+  uint32 status = 1;
+  string name = 2;
+  string picUrl = 3;
+  uint32 sort = 4;
+  optional string description = 5;
+  uint64 id = 6;
+}
+
+message PropertyListByIdsReq {
+  repeated uint64 id = 1;
+}
+
+message BrandInfo {
+  optional uint64 id = 1;
+  optional int64 created_at = 2;
+  optional int64 updated_at = 3;
+  optional uint32 status = 4;
+  optional string name = 5;
+  optional string pic_url = 6;
+  optional uint32 sort = 7;
+  optional string description = 8;
+}
+
+message CategoryBase {
+  uint64 parent_id = 1;
+  string name = 2;
+  string pic_url = 3;
+  optional uint32 sort = 4;
+  optional string description = 5;
+  uint32 status = 6;
+}
+
+message CategoryUpdateReq {
+  uint64 parent_id = 1;
+  string name = 2;
+  string pic_url = 3;
+  optional string big_pic_url = 4;
+  optional uint32 sort = 5;
+  uint32 status = 6;
+  uint64 id = 7;
+  optional string description = 8;
+}
+
+message CategoryListReq {
+  optional string name = 1;
+  optional uint32 status = 2;
+  optional uint64 parentId = 3;
+}
+
+message CommentListResp {
+  uint64 total = 1;
+  repeated CommentInfo data = 2;
+}
+
+message CommentListReq {
+  uint64 page = 1;
+  uint64 page_size = 2;
+  optional string user_nickname = 3;
+  optional string user_avatar = 4;
+  optional string spu_name = 5;
+}
+
+message PropertyValueListResp {
+  uint64 total = 1;
+  repeated PropertyValueInfo data = 2;
+}
+
+message IDsReq {
+  repeated uint64 ids = 1;
+}
+
+message PropertyInfo {
+  optional uint64 id = 1;
+  optional int64 created_at = 2;
+  optional int64 updated_at = 3;
+  optional uint32 status = 4;
+  optional string name = 5;
+  optional string remark = 6;
+}
+
+message PropertyValueDetailResp {
+  repeated SkuProperty skuProperty = 1;
+}
+
+message BrandPageReq {
+  uint64 page = 1;
+  uint64 page_size = 2;
+  optional string name = 3;
+  optional uint32 status = 4;
+  repeated int64 createdAt = 5;
+}
+
+message CategoryListResp {
+  repeated CategoryInfo data = 1;
+}
+
+message CommentInfo {
+  optional uint64 id = 1;
+  optional int64 created_at = 2;
+  optional int64 updated_at = 3;
+  optional int64 user_id = 4;
+  optional string user_nickname = 5;
+  optional string user_avatar = 6;
+  optional bool anonymous = 7;
+  optional int64 order_id = 8;
+  optional int64 order_item_id = 9;
+  optional int64 spu_id = 10;
+  optional string spu_name = 11;
+  optional int64 sku_id = 12;
+  optional string sku_pic_url = 13;
+  optional string sku_properties = 14;
+  optional bool visible = 15;
+  optional int32 scores = 16;
+  optional int32 description_scores = 17;
+  optional int32 benefit_scores = 18;
+  optional string content = 19;
+  optional string pic_urls = 20;
+  optional bool reply_status = 21;
+  optional int64 reply_user_id = 22;
+  optional string reply_content = 23;
+  optional int64 reply_time = 24;
+}
+
+message PropertyListByNameReq {
+  optional string name = 1;
+}
+
+message PropertyValueListReq {
+  uint64 page = 1;
+  uint64 page_size = 2;
+  optional string name = 3;
+  optional string remark = 4;
+}
+
+message SkuListResp {
+  repeated SkuInfo data = 2;
+}
+
+message UUIDReq {
+  string id = 1;
+}
+
+message CategoryCreateReq {
+  uint64 parent_id = 1;
+  string name = 2;
+  string pic_url = 3;
+  optional string big_pic_url = 4;
+  optional uint32 sort = 5;
+  uint32 status = 6;
+  optional string description = 7;
+}
+
+message PropertyValueUpdateReq {
+  uint64 propertyId = 1;
+  string name = 2;
+  optional string remark = 3;
+  uint64 id = 4;
+}
+
+message SkuCreateOrUpdateReq {
+  int32 price = 1;
+  optional int32 marketPrice = 2;
+  optional int32 costPrice = 3;
+  optional string barCode = 4;
+  string picUrl = 5;
+  int32 stock = 6;
+  optional double weight = 7;
+  optional double volume = 8;
+  repeated SkuProperty properties = 9;
+}
+
+//  base message
+message Empty {}
+
+message SkuProperty {
+  uint64 propertyId = 1;
+  string propertyName = 2;
+  uint64 valueId = 3;
+  string valueName = 4;
+}
+
+message CategoryLevelResp {
+  optional int64 level = 1;
+}
+
+message PropertyValueCreateReq {
+  uint64 propertyId = 1;
+  string name = 2;
+  optional string remark = 3;
+}
+
+message PropertyUpdateReq {
+  string name = 1;
+  optional string remark = 2;
+  uint64 id = 3;
+}
+
+message PropertyValueInfo {
+  optional uint64 id = 1;
+  optional int64 created_at = 2;
+  optional int64 updated_at = 3;
+  optional uint64 property_id = 4;
+  optional string name = 5;
+  optional string remark = 6;
+}
+
+message Ids {
+  repeated uint64 id = 1;
+}
+
+message PropertyValuePageReq {
+  uint64 page = 1;
+  uint64 page_size = 2;
+  optional string name = 3;
+  optional string propertyId = 4;
+}
+
+message SpuCreateReq {
+  string name = 1;
+  string keyword = 2;
+  string introduction = 3;
+  string description = 4;
+  optional string barCode = 5;
+  uint64 categoryId = 6;
+  uint64 brandId = 7;
+  string picUrl = 8;
+  repeated string sliderPicUrls = 9;
+  optional string videoUrl = 10;
+  uint32 unit = 11;
+  uint32 sort = 12;
+  bool specType = 13;
+  uint64 deliveryTemplateId = 14;
+  bool recommendHot = 15;
+  bool recommendBenefit = 16;
+  bool recommendBest = 17;
+  bool recommendNew = 18;
+  bool recommendGood = 19;
+  int32 giveIntegral = 20;
+  repeated GiveCouponTemplate giveCouponTemplates = 21;
+  bool subCommissionType = 22;
+  repeated int32 activityOrders = 23;
+  optional int32 virtualSalesCount = 24;
+  repeated SkuCreateOrUpdateReq skus = 25;
+}
+
+message SpuUpdateStatusReq {
+  uint64 id = 1;
+  uint32 status = 2;
+}
+
+message PageInfoReq {
+  uint64 page = 1;
+  uint64 page_size = 2;
+}
+
+message BrandResp {
+  optional uint32 status = 1;
+  optional string name = 2;
+  optional string picUrl = 3;
+  optional uint32 sort = 4;
+  optional string description = 5;
+  optional uint64 id = 6;
+  optional int64 createdAt = 7;
+}
+
+message PropertyListResp {
+  uint64 total = 1;
+  repeated PropertyInfo data = 2;
+}
+
+message PropertyCreateReq {
+  string name = 1;
+  optional string remark = 2;
+}
+
+message IDReq {
+  uint64 id = 1;
+}
+
+message BaseMsg {
+  string msg = 1;
+}
+
+message SpuListReq {
+  uint64 page = 1;
+  uint64 page_size = 2;
+  optional string name = 3;
+  optional string keyword = 4;
+  optional string introduction = 5;
+}
+
+message SkuInfo {
+  optional uint64 id = 1;
+  optional int64 created_at = 2;
+  optional int64 updated_at = 3;
+  optional uint64 spu_id = 4;
+  repeated SkuProperty properties = 5;
+  optional int32 price = 6;
+  optional int32 market_price = 7;
+  optional int32 cost_price = 8;
+  optional string bar_code = 9;
+  optional string pic_url = 10;
+  optional int32 stock = 11;
+  optional double weight = 12;
+  optional double volume = 13;
+  optional int32 sales_count = 16;
+}
+
+message SpuListResp {
+  uint64 total = 1;
+  repeated SpuInfo data = 2;
+}
+
+message PropertyPageReq {
+  uint64 page = 1;
+  uint64 page_size = 2;
+  optional string name = 3;
+  optional uint32 status = 4;
+  repeated int64 createdAt = 5;
+}
+
+message SpuInfo {
+  optional uint64 id = 1;
+  optional int64 created_at = 2;
+  optional int64 updated_at = 3;
+  optional uint32 status = 4;
+  optional uint32 sort = 5;
+  optional string name = 6;
+  optional string keyword = 7;
+  optional string introduction = 8;
+  optional string description = 9;
+  optional string bar_code = 10;
+  optional uint64 category_id = 11;
+  optional uint64 brand_id = 12;
+  optional string pic_url = 13;
+  repeated string slider_pic_urls = 14;
+  optional string video_url = 15;
+  optional uint32 unit = 16;
+  optional bool spec_type = 17;
+  optional int32 price = 18;
+  optional int32 market_price = 19;
+  optional int32 cost_price = 20;
+  optional int32 stock = 21;
+  optional uint64 delivery_template_id = 22;
+  optional bool recommend_hot = 23;
+  optional bool recommend_benefit = 24;
+  optional bool recommend_best = 25;
+  optional bool recommend_new = 26;
+  optional bool recommend_good = 27;
+  optional int32 give_integral = 28;
+  repeated uint64 give_coupon_template_ids = 29;
+  optional bool sub_commission_type = 30;
+  repeated int32 activity_orders = 31;
+  optional int32 sales_count = 32;
+  optional int32 virtual_sales_count = 33;
+  optional int32 browse_count = 34;
+}
+
+message BaseUUIDResp {
+  string id = 1;
+  string msg = 2;
+}
+
+message GiveCouponTemplate {
+  uint64 id = 1;
+  string name = 2;
+}
+
+service Product {
+  //  group: base
+  rpc initDatabase(Empty) returns (BaseResp);
+  //  Brand management
+  //  group: brand
+  rpc createBrand(BrandCreateReq) returns (BaseIDResp);
+  //  group: brand
+  rpc updateBrand(BrandUpdateReq) returns (BaseResp);
+  //  group: brand
+  rpc getBrandList(BrandListReq) returns (BrandListResp);
+  //  group: brand
+  rpc getBrandById(IDReq) returns (BrandInfo);
+  //  group: brand
+  rpc deleteBrand(IDReq) returns (BaseResp);
+  //  group: brand
+  rpc getBrandPage(BrandPageReq) returns (BrandListResp);
+  //  Category management
+  //  group: category
+  rpc createCategory(CategoryCreateReq) returns (BaseIDResp);
+  //  group: category
+  rpc updateCategory(CategoryUpdateReq) returns (BaseResp);
+  //  group: category
+  rpc deleteCategory(IDReq) returns (BaseResp);
+  //  group: category
+  rpc getCategoryById(IDReq) returns (CategoryInfo);
+  //  group: category
+  rpc getCategoryLevel(IDReq) returns (CategoryLevelResp);
+  //  group: category
+  rpc getEnableCategoryList(CategoryListReq) returns (CategoryListResp);
+  //  Comment management
+  //  group: comment
+  rpc createComment(CommentInfo) returns (BaseIDResp);
+  //  group: comment
+  rpc updateComment(CommentInfo) returns (BaseResp);
+  //  group: comment
+  rpc getCommentList(CommentListReq) returns (CommentListResp);
+  //  group: comment
+  rpc getCommentById(IDReq) returns (CommentInfo);
+  //  group: comment
+  rpc deleteComment(IDReq) returns (BaseResp);
+  //  Property management
+  //  group: property
+  rpc createProperty(PropertyCreateReq) returns (BaseIDResp);
+  //  group: property
+  rpc updateProperty(PropertyUpdateReq) returns (BaseResp);
+  //  group: property
+  rpc deleteProperty(IDReq) returns (BaseResp);
+  //  group: property
+  rpc getPropertyListByName(PropertyListByNameReq) returns (PropertyListResp);
+  //  group: property
+  rpc getPropertyPage(PropertyPageReq) returns (PropertyListResp);
+  //  group: property
+  rpc getPropertyById(IDReq) returns (PropertyInfo);
+  //  group: property
+  rpc getPropertyListByIds(PropertyListByIdsReq) returns (PropertyListResp);
+  //  PropertyValue management
+  //  group: propertyvalue
+  rpc createPropertyValue(PropertyValueCreateReq) returns (BaseIDResp);
+  //  group: propertyvalue
+  rpc deletePropertyValue(IDReq) returns (BaseResp);
+  //  group: propertyvalue
+  rpc getPropertyValueById(IDReq) returns (PropertyValueInfo);
+  //  group: propertyvalue
+  rpc getPropertyValueDetailList(IDsReq) returns (PropertyValueDetailResp);
+  //  group: propertyvalue
+  rpc getPropertyValueListByPropertyId(IDsReq) returns (PropertyValueListResp);
+  //  group: propertyvalue
+  rpc getPropertyValuePage(PropertyValuePageReq) returns (PropertyValueListResp);
+  //  group: propertyvalue
+  rpc updatePropertyValue(PropertyValueUpdateReq) returns (BaseResp);
+  //  Sku management
+  //  group: sku
+  rpc deleteSku(IDReq) returns (BaseResp);
+  //  group: sku
+  rpc getSkuList(IDsReq) returns (SkuListResp);
+  //  group: sku
+  rpc getSkuById(IDReq) returns (SkuInfo);
+  //  group: sku
+  rpc getSkuListBySpuId(IDReq) returns (SkuListResp);
+  //  Spu management
+  //  group: spu
+  rpc createSpu(SpuCreateReq) returns (BaseIDResp);
+  //  group: spu
+  rpc updateSpu(SpuUpdateReqVO) returns (BaseResp);
+  //  group: spu
+  rpc updateStatus(SpuUpdateStatusReq) returns (BaseResp);
+  //  group: spu
+  rpc getSpuList(SpuListReq) returns (SpuListResp);
+  //  group: spu
+  rpc getSpuById(IDReq) returns (SpuInfo);
+  //  group: spu
+  rpc deleteSpu(IDReq) returns (BaseResp);
+  // group: spu
+  rpc validateSpuList(IDsReq) returns (SpuListResp);
+}
+

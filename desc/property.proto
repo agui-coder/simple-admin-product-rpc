@@ -1,0 +1,62 @@
+syntax = "proto3";
+
+// Property message
+
+message PropertyInfo {
+  optional uint64 id = 1;
+  optional int64 created_at = 2;
+  optional int64 updated_at = 3;
+  optional uint32 status = 4;
+  optional string name = 5;
+  optional string remark = 6;
+}
+
+message PropertyListResp {
+  uint64 total = 1;
+  repeated PropertyInfo data = 2;
+}
+
+message PropertyCreateReq {
+  string name = 1;
+  optional string remark = 2;
+}
+
+message PropertyUpdateReq {
+  string name = 1;
+  optional string remark = 2;
+  uint64 id =3;
+}
+
+message PropertyListByNameReq {
+  optional string name = 1;
+}
+message PropertyPageReq{
+  uint64 page = 1;
+  uint64 page_size = 2;
+  optional string name = 3;
+  optional uint32 status = 4;
+  repeated int64 createdAt =5;
+}
+
+message PropertyListByIdsReq {
+  repeated uint64 id = 1;
+}
+service Product {
+
+  // Property management
+  // group: property
+  rpc createProperty (PropertyCreateReq) returns (BaseIDResp);
+  // group: property
+  rpc updateProperty (PropertyUpdateReq) returns (BaseResp);
+  // group: property
+  rpc deleteProperty (IDReq) returns (BaseResp);
+  // group: property
+  rpc getPropertyListByName (PropertyListByNameReq) returns (PropertyListResp);
+  // group: property
+  rpc getPropertyPage (PropertyPageReq) returns (PropertyListResp);
+  // group: property
+  rpc getPropertyById (IDReq) returns (PropertyInfo);
+  // group: property
+  rpc getPropertyListByIds (PropertyListByIdsReq) returns (PropertyListResp);
+
+}

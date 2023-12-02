@@ -1,0 +1,76 @@
+syntax = "proto3";
+
+// Category message
+
+message CategoryInfo {
+  optional uint64 id = 1;
+  optional int64 created_at = 2;
+  optional int64 updated_at = 3;
+  optional uint32 status = 4;
+  optional uint64 parent_id = 5;
+  optional string name = 6;
+  optional string pic_url = 7;
+  optional string big_pic_url = 8;
+  optional uint32 sort = 9;
+}
+
+message CategoryBase {
+  uint64 parent_id = 1;
+  string name = 2;
+  string pic_url = 3;
+  optional uint32 sort = 4;
+  optional string description = 5;
+  uint32 status = 6;
+}
+
+message CategoryCreateReq{
+  uint64 parent_id = 1;
+  string name = 2;
+  string pic_url = 3;
+  optional string big_pic_url = 4;
+  optional uint32 sort = 5;
+  uint32 status = 6;
+  optional string description = 7;
+}
+
+message CategoryUpdateReq {
+  uint64 parent_id = 1;
+  string name = 2;
+  string pic_url = 3;
+  optional string big_pic_url = 4;
+  optional uint32 sort = 5;
+  uint32 status = 6;
+  uint64 id = 7;
+  optional string description = 8;
+}
+
+message CategoryListResp {
+  repeated CategoryInfo data = 1;
+}
+
+message CategoryListReq {
+  optional string name = 1;
+  optional uint32 status = 2;
+  optional uint64 parentId = 3;
+}
+
+message CategoryLevelResp {
+  optional int64  level = 1;
+}
+
+service Product {
+
+  // Category management
+  // group: category
+  rpc createCategory (CategoryCreateReq) returns (BaseIDResp);
+  // group: category
+  rpc updateCategory (CategoryUpdateReq) returns (BaseResp);
+  // group: category
+  rpc deleteCategory (IDReq) returns (BaseResp);
+  // group: category
+  rpc getCategoryById (IDReq) returns (CategoryInfo);
+  // group: category
+  rpc getCategoryLevel (IDReq) returns (CategoryLevelResp);
+  // group: category
+  rpc getEnableCategoryList (CategoryListReq) returns (CategoryListResp);
+}

@@ -1,0 +1,76 @@
+syntax = "proto3";
+
+// Brand message
+
+message BrandInfo {
+  optional uint64 id = 1;
+  optional int64 created_at = 2;
+  optional int64 updated_at = 3;
+  optional uint32 status = 4;
+  optional string name = 5;
+  optional string pic_url = 6;
+  optional uint32 sort = 7;
+  optional string description = 8;
+}
+
+message  BrandResp{
+  optional uint32 status = 1;
+  optional string name = 2;
+  optional string picUrl = 3;
+  optional uint32 sort = 4;
+  optional string description = 5;
+  optional uint64 id = 6;
+  optional int64 createdAt = 7;
+
+}
+
+message BrandCreateReq{
+  uint32 status = 1;
+  string name = 2;
+  string picUrl = 3;
+  uint32 sort = 4;
+  optional string description = 5;
+}
+
+message BrandUpdateReq {
+  uint32 status = 1;
+  string name = 2;
+  string picUrl = 3;
+  uint32 sort = 4;
+  optional string description = 5;
+  uint64 id = 6;
+}
+
+message BrandListResp {
+  uint64 total = 1;
+  repeated BrandInfo data = 2;
+}
+
+message BrandPageReq {
+  uint64 page = 1;
+  uint64 page_size = 2;
+  optional string name = 3;
+  optional uint32 status = 4;
+  repeated int64 createdAt = 5;
+}
+message  BrandListReq {
+  optional string name = 1;
+}
+
+service Product {
+
+  // Brand management
+  // group: brand
+  rpc createBrand (BrandCreateReq) returns (BaseIDResp);
+  // group: brand
+  rpc updateBrand (BrandUpdateReq) returns (BaseResp);
+  // group: brand
+  rpc getBrandList (BrandListReq) returns (BrandListResp);
+  // group: brand
+  rpc getBrandById (IDReq) returns (BrandInfo);
+  // group: brand
+  rpc deleteBrand (IDReq) returns (BaseResp);
+  // group: brand
+  rpc getBrandPage (BrandPageReq) returns (BrandListResp);
+
+}
